@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1759934117 source:c:\users\acer\documents\estudos\meus_repositorios\c++\trabalho_tp1\dominios.cpp
+	<iostream>
+	<stdexcept>
+	<algorithm>
+	<string>
+	<vector>
+	<cctype>
+	<cmath>
+	"dominios.hpp"
+
+1759933618 c:\users\acer\documents\estudos\meus_repositorios\c++\trabalho_tp1\dominios.hpp
+
+1759933618 source:c:\users\acer\documents\estudos\meus_repositorios\c++\trabalho_tp1\main.cpp
+	<iostream>
+	<stdexcept>
+	"dominios.hpp"
+

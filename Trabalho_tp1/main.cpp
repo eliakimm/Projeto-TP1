@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <cctype>
 #include <stdexcept>
+
 #include "dominios.hpp"
+#include "entidades.hpp"
 
 using namespace std;
 
@@ -29,6 +31,111 @@ int main(){
     cout << "*** SISTEMA DE CADASTRO ***" << endl;
     cout << "----> DADOS PESSOAIS <----" << endl;
     // NOME:
+    // agora atualizado
+    cout << "Nome: ";
+    getline(cin, valorSTR);
+    try{
+        nome.setValor(valorSTR);
+    } catch(invalid_argument& exce){
+        cerr << "Erro no Nome: " << exce.what() << endl;
+        return 1;
+    }
+
+    // EMAIL
+    cout << "Email: ";
+    getline(cin, valorSTR);
+    try{
+        email.setValor(valorSTR);
+    } catch(invalid_argument& exce){
+        cerr << "Erro no Email: " << exce.what() << endl;
+        return 1;
+    }
+
+    // PESSOA
+    try{
+        Pessoa P(nome, email);
+        P.exibirTudo();
+    } catch(const invalid_argument& exce){
+        cerr << "Erro na Pessoa:" << exce.what() << endl;
+        return 1;
+    }
+
+    // QUARTO
+    cout << "----> QUARTO <----" << endl;
+    cout << "Numero do quarto (001 - 999): ";
+    getline(cin, valorSTR);
+    try{
+        numero.setValor(valorSTR);
+    } catch(invalid_argument& exce){
+        cerr << "Erro no Numero: " << exce.what() << endl;
+        return 1;
+    }
+
+    // capcidade
+    cout << "Capacidade (1-4): ";
+    cin >> valorINT;
+    cin.ignore();  // limpar o buffer
+    try{
+        capacidade.setValor(valorINT);
+    } catch(invalid_argument& exce){
+         cerr << "Erro na Capacidade: " << exce.what() << endl;
+         return 1;
+    }
+
+    // DINHEIRO / DIARIA
+    cout << "Diaria: R$ ";
+    cin >> valorDOU;
+    cin.ignore();
+    try{
+        dinheiro.setValor(valorDOU);
+    } catch(invalid_argument& exce){
+        cerr << "Erro no Valor: " << exce.what() << endl;
+        return 1;
+    }
+
+    // RAMAL
+    cout << "Ramal (00-50): ";
+    getline(cin, valorSTR);
+    try{
+        ramal.setValor(valorSTR);
+    } catch(invalid_argument& exce){
+        cerr << "Erro no Ramal: " << exce.what() << endl;
+        return 1;
+    }
+
+    // QUARTO
+    try{
+        Quarto Q(numero, capacidade, dinheiro, ramal);
+        Q.exibirTudo();
+    } catch(const invalid_argument& exce){
+        cerr << "Erro no Quarto: " << exce.what() << endl;
+        return 1;
+    }
+
+    cout << "\n*** CADASTRO CONCLUIDO! ***" << endl;
+    cout << "=================================" << endl;
+    cout << "Nome: " << nome.getValor() << endl;
+    cout << "Email: " << email.getValor() << endl;
+    cout << "Telefone: " << telefone.getValor() << endl;
+    cout << "Senha: " << senha.getValor() << endl;
+
+    cout << "\n DADOS ADICIONAIS:" << endl;
+    cout << "Capacidade: " << capacidade.getValor() << endl;
+    cout << "Cartao: " << cartao.getValor() << endl;
+    cout << "Codigo: " << codigo.getValor() << endl;
+    cout << "Data: " << data.getValor() << endl;
+    cout << "Dinheiro: R$ " << dinheiro.getValor() << endl;
+    cout << "EndereÃ§o: " << endereco.getValor() << endl;
+    cout << "Numero: " << numero.getValor() << endl;
+    cout << "Ramal: " << ramal.getValor() << endl;
+    cout << "=================================" << endl;
+
+    return 0;
+}
+
+
+    /*
+    // APAGAR PARTE ABAIXO:
     while(true){
         cout << "Seu nome: ";
         getline(cin, valorSTR);
@@ -94,7 +201,7 @@ int main(){
         }
     }
 
-    // Cartão
+    // CartÃ£o
     while(true){
         cout << "Numero do cartao (16 digitos): ";
         getline(cin, valorSTR);
@@ -107,7 +214,7 @@ int main(){
         }
     }
 
-    // Código
+    // CÃ³digo
     while(true){
         cout << "Codigo (10 caracteres): ";
         getline(cin, valorSTR);
@@ -147,20 +254,20 @@ int main(){
         }
     }
 
-    // Endereço
+    // EndereÃ§o
     while(true){
-        cout << "Endereço (5-30 caracteres): ";
+        cout << "EndereÃ§o (5-30 caracteres): ";
         getline(cin, valorSTR);
         try{
             endereco.setValor(valorSTR);
-            cout << "Endereço cadastrado!" << endl;
+            cout << "EndereÃ§o cadastrado!" << endl;
             break;
         } catch(const exception& exce){
             cerr << "Erro: " << exce.what() << endl;
         }
     }
 
-    // Número
+    // NÃºmero
     while(true){
         cout << "Numero (001-999): ";
         getline(cin, valorSTR);
@@ -199,10 +306,11 @@ int main(){
     cout << "Codigo: " << codigo.getValor() << endl;
     cout << "Data: " << data.getValor() << endl;
     cout << "Dinheiro: R$ " << dinheiro.getValor() << endl;
-    cout << "Endereço: " << endereco.getValor() << endl;
+    cout << "EndereÃ§o: " << endereco.getValor() << endl;
     cout << "Numero: " << numero.getValor() << endl;
     cout << "Ramal: " << ramal.getValor() << endl;
     cout << "=================================" << endl;
 
+
     return 0;
-}
+}*/

@@ -12,9 +12,8 @@ private:
     virtual void validar(int)= 0;
 public:
     void setValor(int);
-    int getValor(){return valor;}
+    int getValor() const {return valor;}
 };
-
 
 class DominioStr{
 private:
@@ -22,7 +21,7 @@ private:
     virtual void validar(string)=0;
 public:
     void setValor(string);
-    string getValor(){return valor;}
+    string getValor()  const {return valor;}
 };
 
 // MATHEUS ESTEVE AQUI:
@@ -56,22 +55,25 @@ private:
     bool tamanho(const string telefone);
 };
 
-class Capacidade:public Dominio{
+class Capacidade : public Dominio{
 private:
     void validar(int);
+public:
+    void setValor(int);
+    int getValor() const {return valor;}
 };
 
-class Cartao:public DominioStr{
+class Cartao : public DominioStr{
 private:
     void validar(string);
 };
 
-class Codigo:public DominioStr{
+class Codigo : public DominioStr{
 private:
     void validar(string);
 };
 
-class Data:public DominioStr{
+class Data : public DominioStr{
 private:
     void validar(string);
     void mes_dia(string, int);
@@ -84,26 +86,26 @@ private:
     void validar(int);
 public:
     void setValor(double);
-    double getValor(){return valor/100.0;}
+    double getValor() const {return valor/100.0;}
 };
 
-class Endereco:public DominioStr{
+class Endereco : public DominioStr{
 private:
     void validar(string);
     bool digito_valido(char);
 };
 
-class Numero:public DominioStr{
+class Numero : public DominioStr{
 private:
     void validar(string);
 };
 
-class Ramal:public DominioStr{
+class Ramal : public DominioStr{
 private:
     void validar(string);
 };
 
-class Senha:public DominioStr{
+class Senha : public DominioStr{
 private:
     void validar(string);
     bool isespecial(char);

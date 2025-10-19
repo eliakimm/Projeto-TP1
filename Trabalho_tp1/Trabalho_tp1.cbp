@@ -34,7 +34,11 @@
 		</Compiler>
 		<Unit filename="dominios.cpp" />
 		<Unit filename="dominios.hpp" />
+		<Unit filename="entidades.cpp" />
+		<Unit filename="entidades.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="teste_entidades.cpp" />
+		<Unit filename="teste_entidades.hpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

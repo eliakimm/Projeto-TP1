@@ -6,8 +6,11 @@
 #include <stdexcept>
 #include <vector>
 #include <cmath>
+#include <map>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 //DOMINIO:
 //set para classes derivadas que utilizam valores do tipo inteiro;

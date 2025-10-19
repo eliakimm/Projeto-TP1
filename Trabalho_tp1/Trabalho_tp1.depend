@@ -16,3 +16,53 @@
 	<stdexcept>
 	"dominios.hpp"
 
+1760844309 source:c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\dominios.cpp
+	"dominios.hpp"
+	<iostream>
+	<algorithm>
+	<cctype>
+	<string>
+	<stdexcept>
+	<vector>
+	<cmath>
+	<map>
+	<chrono>
+
+1760844336 c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\dominios.hpp
+	<iostream>
+	<chrono>
+
+1760847080 source:c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\entidades.cpp
+	"entidades.hpp"
+	<iostream>
+	<algorithm>
+	<cctype>
+	<string>
+	<stdexcept>
+	<vector>
+	<cmath>
+	<map>
+	<chrono>
+
+1760845277 c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\entidades.hpp
+	"dominios.hpp"
+	<iostream>
+	<chrono>
+
+1760844309 source:c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\main.cpp
+	<iostream>
+	<string>
+	<algorithm>
+	<cctype>
+	<stdexcept>
+	"dominios.hpp"
+	"entidades.hpp"
+	"teste_entidades.hpp"
+
+1760846816 source:c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\teste_entidades.cpp
+	"entidades.hpp"
+	<iostream>
+
+1760844309 c:\users\acer\documents\estudos\meus_repositorios\projeto-tp1\trabalho_tp1\teste_entidades.hpp
+	"entidades.hpp"
+

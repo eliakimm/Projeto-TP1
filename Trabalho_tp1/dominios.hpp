@@ -1,8 +1,9 @@
 #ifndef DOMINIOS_HPP_INCLUDED
 #define DOMINIOS_HPP_INCLUDED
 
-#include <string>
 #include <iostream>
+#include <chrono>
+
 
 using namespace std;
 
@@ -58,9 +59,9 @@ private:
 class Capacidade : public Dominio{
 private:
     void validar(int);
-public:
-    void setValor(int);
-    int getValor() const {return valor;}
+//public:
+    //void setValor(int);
+    //int getValor() const {return valor;}
 };
 
 class Cartao : public DominioStr{

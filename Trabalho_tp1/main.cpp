@@ -6,12 +6,20 @@
 
 #include "dominios.hpp"
 #include "entidades.hpp"
+#include "teste_entidades.hpp"
 
 using namespace std;
 
 int main(){
     // declaracoes:
-    Nome nome;
+
+    //runGerente();
+
+    //runHospede();
+
+    runReserva();
+
+    /*Nome nome;
     Email email;
     Telefone telefone;
     Senha senha;
@@ -128,7 +136,7 @@ int main(){
     cout << "Endereço: " << endereco.getValor() << endl;
     cout << "Numero: " << numero.getValor() << endl;
     cout << "Ramal: " << ramal.getValor() << endl;
-    cout << "=================================" << endl;
+    cout << "=================================" << endl;*/
 
     return 0;
 }

@@ -2,10 +2,8 @@
 #define ENTIDADES_HPP_INCLUDED
 #include "dominios.hpp"
 #include <iostream>
-#include <chrono>
 
 using namespace std;
-using namespace std::chrono;
 
 class Pessoa{  // nome email
 private:
@@ -23,7 +21,8 @@ public:
 
     void exibirTudo() const;
 };
-
+// ===================================================
+// gerente
 class Gerente:public Pessoa{
 private:
     Ramal ramal;
@@ -37,8 +36,11 @@ public:
 
     //Construtores:
     Gerente(Nome, Email, Ramal, Senha);
+
+    void exibirTudo() const;
 };
 
+// hospete
 class Hospede:public Pessoa{
 private:
     Endereco endereco;
@@ -52,7 +54,11 @@ public:
 
     //Construtores:
     Hospede(Nome, Email, Endereco, Cartao);
+
+    void exibirTudo() const;
 };
+
+// ===================================================
 
 class Quarto{  // numero capacidade dinheiro ramal
 private:
@@ -75,7 +81,7 @@ public:
 
     void exibirTudo() const;
 };
-
+// =====================================
 class Reserva{
 private:
     Data chegada;
@@ -108,6 +114,28 @@ public:
     void exibir_reserva();
 
 };
+// =====================================
 
+class Hotel{
+private:
+    Nome nome;
+    Endereco endereco;
+    Telefone telefone;
+    Codigo codigo;
+public:
+    Hotel(const Nome& nome, const Endereco& endereco, const Telefone& telefone, const Codigo& codigo);
 
+    void setNome(const Nome& nomeNovo);
+    void setEndereco(const Endereco& endeNovo);
+    void setTelefone(const Telefone& teleNovo);
+    void setCodigo(const Codigo& codeNovo);
+
+    Nome getNome() const;
+    Endereco getEndereco() const;
+    Telefone getTelefone() const;
+    Codigo getCodigo() const;
+
+    void exibirTudo() const;
+
+};
 #endif // ENTIDADES_HPP_INCLUDED

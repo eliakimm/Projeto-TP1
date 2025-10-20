@@ -12,7 +12,6 @@
 using namespace std;
 using namespace std::chrono;
 
-
 // Pessoa
 Pessoa::Pessoa(const Nome& nome, const Email& email){
     this->nome = nome;
@@ -34,14 +33,13 @@ Email Pessoa::getEmail() const{
 }
 
 void Pessoa::exibirTudo() const{
-    cout << "=== DADOS PESSOAIS - TESTE ===" << endl;
+    cout << "\n=== DADOS PESSOAIS ===" << endl;
     cout << "Nome: " << nome.getValor() << endl;
     cout << "Email: " << email.getValor() << endl;
-    cout << "======================" << endl;
+    cout << "======================\n" << endl;
 }
-
-//GERENTE:
-
+// ===========================================
+// gerente
 void Gerente::setRamal(Ramal ramal){
     this->ramal= ramal;
 }
@@ -56,8 +54,15 @@ Gerente::Gerente(Nome nome, Email email, Ramal ramal, Senha senha)
     setSenha(senha);
 }
 
-//HOSPEDE:
+void Gerente::exibirTudo() const{
+    cout << "\n=== DADOS GERENTE ===" << endl;
+    cout << "Ramal: " << ramal.getValor() << endl;
+    cout << "Senha: " << senha.getValor() << endl;
+    cout << "Ramal: " << ramal.getValor() << endl;
+    cout << "======================\n" << endl;
+}
 
+// hospede
 void Hospede::setEndereco(Endereco endereco){
     this->endereco= endereco;
 }
@@ -72,7 +77,10 @@ Hospede::Hospede(Nome nome, Email email, Endereco endereco, Cartao cartao)
     setCartao(cartao);
 }
 
-//QUARTO:
+void Hospede::exibirTudo() const{
+    cout << "Endereco: " << endereco.getValor() << endl;
+    cout << "Cartao: " << cartao.getValor() << endl;
+}
 
 Quarto::Quarto(const Numero& numero, const Capacidade& capacidade, const Dinheiro& dinheiro, const Ramal& ramal){
     this->numero = numero;
@@ -117,9 +125,8 @@ void Quarto::exibirTudo() const{
     cout << "Ramal: " << ramal.getValor() << endl;
     cout << "=======================" << endl;
 }
-
-//RESERVA:
-
+// ===========================================
+// reservA
 int Reserva::ContarDias(string data1, string data2) {
     map<string,int> meses = {
         {"JAN",1}, {"FEV",2}, {"MAR",3}, {"ABR",4},
@@ -184,11 +191,55 @@ double Reserva::CalculoValor(){
     this->valor= temp;
 }
 
-
 void Reserva::exibir_reserva(){
     cout << chegada.getValor() << " | RESERVA:" << endl;
     cout << "Nome do hospede: " << hospede->getNome().getValor() << endl;
     cout << "Quarto: " << quarto->getNumero().getValor() << endl;
     cout << "Ramal: " << quarto->getRamal().getValor() << endl;
     cout << "Valor total: " << valor.getValor() << endl;
+}
+
+// ===========================================
+Hotel::Hotel(const Nome& nome, const Endereco& endereco, const Telefone& telefone, const Codigo& codigo){
+    this->nome = nome;
+    this->endereco = endereco;
+    this->telefone = telefone;
+    this->codigo = codigo;
+}
+
+void Hotel::setNome(const Nome& nomeNovo){
+    nome = nomeNovo;
+}
+Nome Hotel::getNome() const{
+    return nome;
+}
+
+void Hotel::setEndereco(const Endereco& endeNovo){
+    endereco = endeNovo;
+}
+Endereco Hotel::getEndereco() const{
+    return endereco;
+}
+
+void Hotel::setTelefone(const Telefone& teleNovo){
+    telefone = teleNovo;
+}
+Telefone Hotel::getTelefone() const{
+    return telefone;
+}
+
+void Hotel::setCodigo(const Codigo& codeNovo){
+    codigo = codeNovo;
+}
+Codigo Hotel::getCodigo() const{
+    return codigo;
+}
+
+void Hotel::exibirTudo() const{
+    cout << "=== DADOS DO HOTEL  ===" << endl;
+    cout << "Nome: " << nome.getValor() << endl;
+    cout << "Endereco: " << endereco.getValor() << endl;
+    cout << "Telefone" << telefone.getValor() << endl;
+    cout << "Codigo: " << codigo.getValor() << endl;
+    cout << "=======================" << endl;
 }

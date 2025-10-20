@@ -105,6 +105,9 @@ public:
     Hospede* getHospede(){return hospede;}
     Quarto* getQuarto(){return quarto;}
 
+    Reserva(const Codigo& c, const Data& ch, const Data& pt, Hospede* h, Quarto* q);
+
+
     void exibir_reserva();
 
 };

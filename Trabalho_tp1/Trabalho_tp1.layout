@@ -4,7 +4,7 @@
 	<ActiveTarget name="Debug" />
 	<File name="dominios.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10175" topLine="13" />
+			<Cursor1 position="10175" topLine="65" />
 		</Cursor>
 		<Folding>
 			<Collapse line="16" />
@@ -43,28 +43,14 @@
 			<Collapse line="424" />
 		</Folding>
 	</File>
-	<File name="entidades.hpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="teste_entidades.hpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1995" topLine="79" />
+			<Cursor1 position="209" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="entidades.cpp" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="246" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="teste_entidades.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2858" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="5" />
-			<Collapse line="49" />
-		</Folding>
-	</File>
-	<File name="entidades.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4576" topLine="142" />
+			<Cursor1 position="4271" topLine="155" />
 		</Cursor>
 		<Folding>
 			<Collapse line="76" />
@@ -79,9 +65,29 @@
 			<Collapse line="111" />
 		</Folding>
 	</File>
+	<File name="entidades.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2284" topLine="93" />
+		</Cursor>
+	</File>
 	<File name="dominios.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1876" topLine="71" />
+			<Cursor1 position="1876" topLine="94" />
 		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="60" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="teste_entidades.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6754" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="51" />
+			<Collapse line="97" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

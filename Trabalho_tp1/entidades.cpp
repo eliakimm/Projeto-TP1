@@ -170,10 +170,16 @@ void Reserva::setCodigo(Codigo codigo){
 }
 
 void Reserva::setHospede(Hospede* h){
+    if(h == nullptr){
+        throw invalid_argument("Hospede inexistente");
+    }
     this->hospede= h;
 }
 
 void Reserva::setQuarto(Quarto* q){
+    if(q == nullptr){
+        throw invalid_argument("Quarto inexistente");
+    }
     this->quarto= q;
 }
 
@@ -182,6 +188,12 @@ double Reserva::CalculoValor(){
     Dinheiro temp;
     temp.setValor(dias_contados);
     this->valor= temp;
+}
+
+//Construtor da classe:
+Reserva::Reserva(const Codigo& c, const Data& ch, const Data& pt, Hospede* h, Quarto* q)
+    : codigo(c), chegada(ch), partida(pt), hospede(h), quarto(q){
+    CalculoValor();
 }
 
 

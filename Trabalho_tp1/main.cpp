@@ -17,7 +17,7 @@ int main(){
 
     //runHospede();
 
-    runReserva();
+    runReserva2();
 
     /*Nome nome;
     Email email;

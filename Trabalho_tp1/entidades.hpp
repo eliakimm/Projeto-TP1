@@ -5,20 +5,51 @@
 
 using namespace std;
 
+/**
+* @class Pessoa
+* @brief Entidade que representa uma pessoa
+*
+* @details A classe Pessoa tem dominios que pertencem
+* a pessoa que vai ser cadastrada
+*
+* @author Matheus Nunes Ferreira - 231021511
+*/
 class Pessoa{  // nome email
 private:
-    Nome nome;
-    Email email;
+    Nome nome;        ///< Nome completeo
+    Email email;      ///< Endereco email valido
 public:
-    // construtor da Pessoa
+
+    /**
+    * @brief Construtor da entidade Pessoa
+    * @param Nome nome completo e valido
+    * @param Email email valido
+    */
     Pessoa(const Nome& nome, const Email& email);
 
+    /**
+    * @brief Atualiza o nome da Pessoa
+    * @param nomeNovo a ser validado e atribuido
+    * @param emailNovo a ser validado e atribuido
+    */
     void setNome(const Nome& nomeNovo);
     void setEmail(const Email& emailNovo);
 
+    /**
+    * @brief Recupera o nome da Pessoa
+    * @return  Nome objeto contendo o nome ja validado
+    */
     Nome getNome() const;
+
+    /**
+    * @brief Recupera o email da Pessoa
+    * @return  Email objeto contendo o email ja validado
+    */
     Email getEmail() const;
 
+    /**
+    * @brief Vai exibir os dados em uma lista
+    */
     void exibirTudo() const;
 };
 // ===================================================

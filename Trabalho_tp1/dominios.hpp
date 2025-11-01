@@ -25,10 +25,32 @@ public:
     string getValor()  const {return valor;}
 };
 
-// MATHEUS ESTEVE AQUI:
-// nome
+/**
+* @class Nome
+* @brief Classe que representaa e valida nomes.
+*
+* Herda de DominioStr e implementa validacao especifica para nomes.
+*
+* @author Matheus Nunes Ferreira - 231021511
+*/
 class Nome : public DominioStr {
 private:
+    /**
+    * @brief Valida o formato do nome.
+    *
+    * @param nome String contendo o nome a ser validado.
+    * @throw
+    *
+    * @note Executa todas as verificacoes de validacao no nome fornecido:
+    * - Verifica se esta vazio
+    * - Verifica comprimeto 5 a 20 caracteres
+    * - Verifica se tem numeros
+    * - Verifica formatacao dos espacos
+    * - Verifica capitalizacao
+    *
+    * @param nome String com o nome a ser validado.
+    * @throw invalid_argument Se o nome nao atender alguma das regras.
+    */
     void validar(const string nome) override;
 
     bool temNumero(const string nome);
@@ -48,8 +70,24 @@ private:
     bool pontoCom(const std::string extensao);
 };
 
+/**
+* @class Telefone.
+* @brief Classe que representa e valida um telefone.
+*
+* Herda de DominioStr e implementa valida��o espec�fica para nummeros de telefone
+* seguindo as regras de formata��o padr�o do Brasil.
+* @author Matheus Nunes Ferreira - 231021511
+*/
 class Telefone : public DominioStr{
 private:
+    /**
+    * @brief Valida um telefone
+    * @param telefone String contendo o numero a ser validado
+    * @throw invalid_argument Se o numero nao atender aos criterios de validao
+    * @note Executa as seguintes validacoes:
+    * - Verifica o DDD (11-99)
+    * - Verifica o tamanho do numero
+    */
     void validar(const string telefone) override;
 
     bool DDD(const string telefone);

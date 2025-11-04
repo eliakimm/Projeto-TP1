@@ -126,7 +126,7 @@ void Quarto::exibirTudo() const{
     cout << "=======================" << endl;
 }
 // ===========================================
-// reservA
+// reserva
 int Reserva::ContarDias(string data1, string data2) {
     map<string,int> meses = {
         {"JAN",1}, {"FEV",2}, {"MAR",3}, {"ABR",4},

@@ -7,6 +7,8 @@
 
 using namespace std;
 
+///Classe Dominio;
+
 class Dominio{
 private:
     int valor;

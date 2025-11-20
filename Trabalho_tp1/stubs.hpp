@@ -30,10 +30,17 @@ private:
     ContainerGerentes containerGerentes;
     ContainerHospedes containerHospedes;
     ContainerReservas* reservaContainer = nullptr;
+    ContainerHoteis* hotelContainer = nullptr;
 public:
     ContainerGerentes* getContainer() { return &containerGerentes; }
+    ContainerHospedes* getHospedeContainer() { return &containerHospedes; }
     void setReservaContainer(ContainerReservas* c) { reservaContainer = c; }
-    
+    void setHotelContainer(ContainerHoteis* c) { hotelContainer = c; }
+    /**
+     * @brief Construtor que semeia usuarios de teste para facilitar execucao de testes manuais/automáticos.
+     */
+    StubPessoal();
+
     bool criarUsuario(const Gerente&) override;
     bool lerUsuario(Gerente&) override;
     bool editarUsuario(const Gerente&) override;
@@ -43,7 +50,7 @@ public:
     bool lerHospede(Hospede&) override;
     bool editarHospede(const Hospede&) override;
     bool excluirHospede(const Email&) override;
-    std::vector<Hospede> listarHospedes() override;
+    vector<Hospede> listarHospedes() override;
 };
 
 /**
@@ -55,8 +62,11 @@ class StubGerenciamento : public IS_Gerenciamento {
 private:
     ContainerHoteis container;
     ContainerReservas* reservaContainer = nullptr;
+    ContainerGerentes* gerentesContainer = nullptr;
 public:
+    ContainerHoteis* getContainer() { return &container; }
     void setReservaContainer(ContainerReservas* c) { reservaContainer = c; }
+    void setGerentesContainer(ContainerGerentes* c) { gerentesContainer = c; }
     bool criarHotel(const Hotel&) override;
     bool lerHotel(Hotel&) override;
     bool editarHotel(const Hotel&) override;
@@ -66,8 +76,9 @@ public:
     bool lerQuarto(const Codigo&, Quarto&) override;
     bool editarQuarto(const Codigo&, const Quarto&) override;
     bool excluirQuarto(const Codigo&, const Numero&) override;
-    std::vector<Hotel> listarHoteis() override;
-    std::vector<Quarto> listarQuartos(Codigo) override;
+    vector<Hotel> listarHoteis() override;
+    vector<Quarto> listarQuartos(Codigo) override;
+    bool lerGerente(Gerente&) override;
 };
 
 /**
@@ -78,11 +89,15 @@ public:
 class StubReserva : public IS_Reserva {
 private:
     ContainerReservas container;
+    ContainerHospedes* hospedesContainer = nullptr;
+    ContainerHoteis*   hoteisContainer = nullptr;
 public:
     ContainerReservas* getContainer() { return &container; }
+    void setHospedeContainer(ContainerHospedes* c) { hospedesContainer = c; }
+    void setHotelContainer(ContainerHoteis* c) { hoteisContainer = c; }
     bool criarReserva(const Hospede&, const Reserva&) override;
     bool cancelarReserva(const Codigo&) override;
-    std::vector<Reserva> listarReservas(Email) override;
+    vector<Reserva> listarReservas(Email) override;
     bool lerReserva(Reserva&) override;
     bool editarReserva(const Reserva&) override;
     bool excluirReserva(const Codigo&) override;

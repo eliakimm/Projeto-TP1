@@ -1,0 +1,30 @@
+controladoria.cpp: In member function 'void CntrApresentacaoReserva::criarReserva(const Email&)':
+controladoria.cpp:326:9: error: 'pausar' was not declared in this scope
+  326 |         pausar();
+      |         ^~~~~~
+controladoria.cpp:345:44: error: no matching function for call to 'Dinheiro::Dinheiro(double&)'
+  345 |     q.setValor(Dinheiro(valorPorCap[capInt]));
+      |                                            ^
+controladoria.cpp:345:44: note: there are 4 candidates
+In file included from interfaces.hpp:4,
+                 from controladoria.hpp:3,
+                 from controladoria.cpp:1:
+dominios.hpp:344:14: note: candidate 1: 'Dinheiro::Dinheiro(const std::string&)'
+  344 |     explicit Dinheiro(const string& v) { setValor(v); }
+      |              ^~~~~~~~
+dominios.hpp:344:37: note: no known conversion for argument 1 from 'double' to 'const std::string&' {aka 'const std::__cxx11::basic_string<char>&'}
+  344 |     explicit Dinheiro(const string& v) { setValor(v); }
+      |                       ~~~~~~~~~~~~~~^
+dominios.hpp:338:5: note: candidate 2: 'Dinheiro::Dinheiro()'
+  338 |     Dinheiro() = default;
+      |     ^~~~~~~~
+dominios.hpp:338:5: note: candidate expects 0 arguments, 1 provided
+dominios.hpp:328:7: note: candidate 3: 'Dinheiro::Dinheiro(const Dinheiro&)'
+  328 | class Dinheiro : public DominioStr {
+      |       ^~~~~~~~
+dominios.hpp:328:7: note: no known conversion for argument 1 from 'double' to 'const Dinheiro&'
+dominios.hpp:328:7: note: candidate 4: 'Dinheiro::Dinheiro(Dinheiro&&)'
+dominios.hpp:328:7: note: no known conversion for argument 1 from 'double' to 'Dinheiro&&'
+controladoria.cpp:354:13: error: 'pausar' was not declared in this scope
+  354 |             pausar();
+      |             ^~~~~~

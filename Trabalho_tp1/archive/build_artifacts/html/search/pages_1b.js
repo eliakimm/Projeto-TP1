@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['símbolos_20não_20encontrados_0',['Problema: &quot;Compilação falha com símbolos não encontrados&quot;',['../md__r_e_a_d_m_e.html#autotoc_md170',1,'']]],
+  ['se_20quer_20compilar_3a_1',['Se quer COMPILAR:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md132',1,'']]],
+  ['se_20quer_20entender_20arquitetura_3a_2',['Se quer ENTENDER ARQUITETURA:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md137',1,'']]],
+  ['se_20quer_20executar_3a_3',['Se quer EXECUTAR:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md133',1,'']]],
+  ['se_20quer_20testar_3a_4',['Se quer TESTAR:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md134',1,'']]],
+  ['se_20quer_20ver_20documentação_3a_5',['Se quer VER DOCUMENTAÇÃO:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md135',1,'']]],
+  ['se_20quer_20verificar_20critérios_3a_6',['Se quer VERIFICAR CRITÉRIOS:',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md136',1,'']]],
+  ['senha_20ramal_20inválido_7',['Problema: &quot;Senha/Ramal inválido&quot;',['../md__r_e_a_d_m_e.html#autotoc_md169',1,'']]],
+  ['serviços_8',['4️⃣ Camada de Serviços',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/DOCUMENTACAO.md#autotoc_md58',1,'']]],
+  ['serviços_20✅_20100_20100_9',['Critério 5: Serviços ✅ &lt;b&gt;100/100&lt;/b&gt;',['../md__s_u_m_a_r_i_o___c_r_i_t_e_r_i_o_s.html#autotoc_md187',1,'']]],
+  ['serviços_20100_20100_20✅_10',['5️⃣ Serviços (100/100) ✅',['../md__v_e_r_i_f_i_c_a_c_a_o___f_i_n_a_l.html#autotoc_md234',1,'']]],
+  ['serviços_20lógica_20de_20negócio_20persistência_11',['5️⃣ Critério 5: Serviços (Lógica de Negócio + Persistência)',['../classpara.html#autotoc_md22',1,'']]],
+  ['sh_12',['build.sh',['../C:/Users/Acer/Documents/Estudos/Meus_repositorios/Projeto-TP1/Trabalho_tp1/INDEX.md#autotoc_md127',1,'']]],
+  ['sistema_20de_20gerenciamento_20de_20hotéis_13',['Trabalho TP1 - Sistema de Gerenciamento de Hotéis',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['smoke_20test_14',['6️⃣ Critério 6: Teste de Fumaça (Smoke Test)',['../classpara.html#autotoc_md27',1,'']]],
+  ['sobre_20reservas_15',['📝 Nota Sobre Reservas',['../md__r_e_a_d_m_e.html#autotoc_md175',1,'']]],
+  ['status_20atual_16',['🎯 Status Atual',['../md__r_e_a_d_m_e.html#autotoc_md177',1,'']]],
+  ['status_3a_2095_208_20completo_20575_20600_20pontos_17',['✅ Status: 95.8% COMPLETO (575/600 pontos)',['../md__v_e_r_i_f_i_c_a_c_a_o___f_i_n_a_l.html#autotoc_md221',1,'']]],
+  ['status_3a_20completo_20100_20pontos_18',['Status: COMPLETO 100 pontos',['../md__c_r_i_t_e_r_i_o_s___a_v_a_l_i_a_c_a_o.html#autotoc_md3',1,'✅ Status: COMPLETO (100 pontos)'],['../classpara.html#autotoc_md8',1,'✅ Status: COMPLETO (100 pontos)'],['../classpara.html#autotoc_md13',1,'✅ Status: COMPLETO (100 pontos)'],['../classcom.html#autotoc_md18',1,'✅ Status: COMPLETO (100 pontos)'],['../classpara.html#autotoc_md23',1,'✅ Status: COMPLETO (100 pontos)']]],
+  ['status_3a_20parcialmente_20pronto_20precisa_20de_20vídeo_19',['⏳ Status: PARCIALMENTE PRONTO - PRECISA DE VÍDEO',['../classpara.html#autotoc_md28',1,'']]],
+  ['stubs_20hpp_20',['stubs.hpp',['../classbrief.html#autotoc_md112',1,'']]],
+  ['suite_20de_20testes_21',['Compilar Suite de Testes',['../md__r_e_a_d_m_e.html#autotoc_md151',1,'']]],
+  ['sumário_22',['📞 Sumário',['../group__para.html#autotoc_md263',1,'']]],
+  ['sumário_20executivo_23',['✅ Verificação de Critérios — Sumário Executivo',['../md__s_u_m_a_r_i_o___c_r_i_t_e_r_i_o_s.html',1,'']]],
+  ['sumario_5fcriterios_20md_208_203_20kb_20⭐_20resumo_20executivo_24',['4. SUMARIO_CRITERIOS.md (8,3 KB) ⭐ &lt;b&gt;RESUMO EXECUTIVO&lt;/b&gt;',['../md__i_n_d_e_x.html#autotoc_md97',1,'']]]
+];

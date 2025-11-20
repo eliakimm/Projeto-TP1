@@ -133,7 +133,7 @@ public:
     /**
      * @brief Lista todos os hospedes cadastrados.
      */
-    virtual std::vector<Hospede> listarHospedes() = 0;
+    virtual vector<Hospede> listarHospedes() = 0;
 
     virtual ~IS_Pessoal() {}
 };
@@ -210,11 +210,17 @@ public:
     /**
      * @brief Lista todos os hoteis.
      */
-    virtual std::vector<Hotel> listarHoteis() = 0;
+    virtual vector<Hotel> listarHoteis() = 0;
     /**
      * @brief Lista todos os quartos de um hotel.
      */
-    virtual std::vector<Quarto> listarQuartos(Codigo) = 0;
+    virtual vector<Quarto> listarQuartos(Codigo) = 0;
+
+    /**
+     * @brief Le dados de um gerente pelo email.
+     * @param g Gerente com email definido; sera preenchido com dados.
+     */
+    virtual bool lerGerente(Gerente&) = 0;
 
     virtual ~IS_Gerenciamento() {}
 };
@@ -265,7 +271,7 @@ public:
      * @brief Lista todas as reservas de um hospede.
      * @param e Email do hospede.
      */
-    virtual std::vector<Reserva> listarReservas(Email) = 0;
+    virtual vector<Reserva> listarReservas(Email) = 0;
     /**
      * @brief Le dados de uma reserva.
      */

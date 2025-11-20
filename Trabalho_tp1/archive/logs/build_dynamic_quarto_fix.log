@@ -1,0 +1,12 @@
+controladoria.cpp: In member function 'void CntrApresentacaoReserva::criarReserva(const Email&)':
+controladoria.cpp:346:34: error: cannot convert 'double' to 'const Dinheiro&'
+  346 |     q.setValor(valorPorCap[capInt]);
+      |                ~~~~~~~~~~~~~~~~~~^
+      |                                  |
+      |                                  double
+In file included from interfaces.hpp:5,
+                 from controladoria.hpp:3,
+                 from controladoria.cpp:1:
+entidades.hpp:278:35: note: initializing argument 1 of 'void Quarto::setValor(const Dinheiro&)'
+  278 |     void setValor(const Dinheiro& v);
+      |                   ~~~~~~~~~~~~~~~~^

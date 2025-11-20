@@ -25,13 +25,14 @@ private:
     void telaLogin();
     void telaCadastroGerente();
     void telaMenuAutenticado(const Email& email);
+    int lerOpcao(const string& prompt, int minValor, int maxValor);
     void limparTela();
     void exibirCabecalho();
     void pausar();
 
 public:
     CntrApresentacaoMenu();
-    
+
     // Setters para injeção de dependência - Serviços
     void setAutenticacao(IS_Autenticacao* srv);
     void setPessoalServico(IS_Pessoal* srv);
@@ -42,10 +43,10 @@ public:
     void setPessoal(IA_Pessoal* cntr);
     void setGerenciamento(IA_Gerenciamento* cntr);
     void setReserva(IA_Reserva* cntr);
-    
+
     // Método principal que inicia o fluxo
     void executar();
-    
+
     virtual ~CntrApresentacaoMenu() {}
 };
 

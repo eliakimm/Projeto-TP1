@@ -1,0 +1,20 @@
+PASS: Gerente - criar
+PASS: Gerente - ler (existe)
+PASS: Gerente - nome correto
+PASS: Gerente - editar
+PASS: Gerente - ler apos editar
+PASS: Gerente - excluir
+PASS: Gerente - nao existe apos exclusao
+PASS: Hotel - criar
+PASS: Hotel - ler
+PASS: Hotel - editar
+PASS: Hotel - ler apos editar
+PASS: Hotel - excluir
+PASS: Hotel - nao existe apos exclusao
+PASS: Hospede - criar
+PASS: Hospede - ler
+PASS: Hospede - editar
+PASS: Hospede - ler apos editar
+PASS: Hospede - excluir
+PASS: Hospede - nao existe apos exclusao
+Fim CRUD tests.

@@ -32,13 +32,20 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="apresentacao_menu.cpp" />
+		<Unit filename="apresentacao_menu.hpp" />
+		<Unit filename="containers.cpp" />
+		<Unit filename="containers.hpp" />
+		<Unit filename="controladoria.cpp" />
+		<Unit filename="controladoria.hpp" />
 		<Unit filename="dominios.cpp" />
 		<Unit filename="dominios.hpp" />
 		<Unit filename="entidades.cpp" />
 		<Unit filename="entidades.hpp" />
+		<Unit filename="interfaces.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="teste_entidades.cpp" />
-		<Unit filename="teste_entidades.hpp" />
+		<Unit filename="stubs.cpp" />
+		<Unit filename="stubs.hpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

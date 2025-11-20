@@ -30,6 +30,26 @@ void CntrApresentacaoMenu::limparTela() {
 #endif
 }
 
+int CntrApresentacaoMenu::lerOpcao(const string& prompt, int minValor, int maxValor) {
+  while (true) {
+    cout << prompt;
+    string line;
+    getline(cin, line);
+    try {
+      int opc = stoi(line);
+      if (opc < minValor || opc > maxValor) {
+        cout << "\nEntrada fora do intervalo. Tente novamente.\n";
+        pausar();
+        continue;
+      }
+      return opc;
+    } catch (...) {
+      cout << "\nEntrada invalida. Tente novamente.\n";
+      pausar();
+    }
+  }
+}
+
 void CntrApresentacaoMenu::exibirCabecalho() {
 
   cout << "==========================================\n";
@@ -69,7 +89,7 @@ void CntrApresentacaoMenu::telaMenuPrincipal() {
     switch (opcao) {
       case 1: telaLogin(); break;
       case 2: telaCadastroGerente(); break;
-      case 0:
+      case 3:
         limparTela();
         cout << "\n==========================================\n";
         cout << "   Obrigado por usar nosso sistema!\n";
@@ -169,18 +189,13 @@ void CntrApresentacaoMenu::telaMenuAutenticado(const Email& email) {
     cout << "==========================================\n";
     cout << "[1] - Gerenciar Dados Pessoais\n";
     cout << "[2] - Gerenciar Hoteis\n";
-    cout << "[2] - Gerenciar Reservas\n";
+    cout << "[3] - Gerenciar Reservas\n";
     cout << "[0] - Logout\n";
     cout << "==========================================\n";
     cout << "-> Escolha uma opcao: ";
 
-  string line;
-  getline(cin, line);
-    try { opcao = stoi(line); } catch(...) {
-      cout << "\nEntrada invalida. Tente novamente.\n";
-      pausar();
-      continue;
-    }
+
+    opcao = lerOpcao("-> Escolha uma opcao: ", 0, 3);
 
     switch (opcao) {
       case 1: if (cntrPessoal) cntrPessoal->executar(email); break;

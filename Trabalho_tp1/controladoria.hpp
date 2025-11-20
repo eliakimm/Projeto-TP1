@@ -47,8 +47,9 @@ class CntrApresentacaoGerenciamento : public IA_Gerenciamento {
 private:
     IS_Gerenciamento* servico;
     void menu(const Email&);
-    void cadastrarHotel();
+    void cadastrarHotel(const Email&);
     void listarHoteis();
+    void excluirHotel(const Email&);
     void cadastrarQuarto();
     void listarQuartos();
     void lerQuarto();
@@ -63,6 +64,7 @@ public:
 class CntrApresentacaoReserva : public IA_Reserva {
 private:
     IS_Reserva* servico;
+    IS_Gerenciamento* servGerenciamento;
     void menu(const Email&);
     void criarReserva(const Email&);
     void cancelarReserva();
@@ -72,6 +74,7 @@ private:
     void excluirReserva();
 public:
     CntrApresentacaoReserva() : servico(nullptr) {}
+    void setGerenciamento(IS_Gerenciamento* s) { servGerenciamento = s; }
     void setReserva(IS_Reserva* s) override { servico = s; }
     void executar(const Email&) override;
 };

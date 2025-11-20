@@ -1,5 +1,6 @@
 #include "controladoria.hpp"
 #include <iostream>
+#include "pricing.hpp"
 using namespace std;
 
 // Removidas implementacoes obsoletas de 'Controladoria' (merge incorreto).
@@ -26,30 +27,20 @@ bool CntrApresentacaoAutenticacao::autenticarGerente() {
     return false;
 }
 
-// ==================== Pessoal ====================
 void CntrApresentacaoPessoal::executar(const Email& email) {
     menu(email);
 }
 
-// Menu que recebe email do usuario autenticado e permite self-service
+// ==================== Pessoal ====================
 void CntrApresentacaoPessoal::menu(const Email& email) {
     int opcao;
     do {
         cout << "==========================================\n"
                   << "               Menu Pessoal               \n"
                   << "==========================================\n"
-                  << "[1] - Criar usuario (Gerente)\n"
-                  << "[2] - Ler usuario (Gerente)\n"
-                  << "[3] - Editar usuario (Gerente)\n"
-                  << "[4] - Excluir usuario (Gerente)\n"
-                  << "[5] - Criar hospede\n"
-                  << "[6] - Ler hospede\n"
-                  << "[7] - Editar hospede\n"
-                  << "[8] - Excluir hospede\n"
-                  << "[9] - Listar hospedes\n"
-                  << "[10] - Ver minha conta\n"
-                  << "[11] - Editar minha conta\n"
-                  << "[12] - Excluir minha conta\n"
+                  << "[1] - Ver minha conta\n"
+                  << "[2] - Editar minha conta\n"
+                  << "[3] - Excluir minha conta\n"
                   << "[0] - Voltar\n"
                   << "==========================================\n"
                   << "-> Escolha: ";
@@ -57,18 +48,9 @@ void CntrApresentacaoPessoal::menu(const Email& email) {
         getline(cin, line);
         try { opcao = stoi(line); } catch(...) { opcao = -1; }
         switch(opcao) {
-            case 1: criarUsuario(); break;
-            case 2: lerUsuario(); break;
-            case 3: editarUsuario(); break;
-            case 4: excluirUsuario(); break;
-            case 5: criarHospede(); break;
-            case 6: lerHospede(); break;
-            case 7: editarHospede(); break;
-            case 8: excluirHospede(); break;
-            case 9: listarHospedes(); break;
-            case 10: verMinhaConta(email); break;
-            case 11: editarMinhaConta(email); break;
-            case 12: excluirMinhaConta(email); break;
+            case 1: verMinhaConta(email); break;
+            case 2: editarMinhaConta(email); break;
+            case 3: excluirMinhaConta(email); break;
         }
     } while(opcao != 0);
 }
@@ -186,45 +168,52 @@ void CntrApresentacaoGerenciamento::executar(const Email& email) {
     menu(email);
 }
 
-void CntrApresentacaoGerenciamento::menu(const Email&) {
+void CntrApresentacaoGerenciamento::menu(const Email& email) {
     int opcao;
     do {
         cout << "==========================================\n"
-                  << "            Menu Gerenciamento            \n"
-                  << "==========================================\n"
-                  << "[1] - Cadastrar hotel\n"
-                  << "[2] - Listar hoteis\n"
-                  << "[3] - Cadastrar quarto\n"
-                  << "[4] - Listar quartos\n"
-                  << "[0] - Voltar\n"
-                  << "==========================================\n"
-                  << "-> Escolha: ";
+                      << "            Menu Gerenciamento            \n"
+                      << "==========================================\n"
+                      << "[1] - Cadastrar hotel\n"
+                      << "[2] - Listar hoteis\n"
+                      << "[3] - Listar quartos\n"
+                      << "[4] - Excluir hotel\n"
+                      << "[0] - Voltar\n"
+                      << "==========================================\n"
+                      << "-> Escolha: ";
         string line;
         getline(cin, line);
         try { opcao = stoi(line); } catch(...) { opcao = -1; }
         switch(opcao) {
-            case 1: cadastrarHotel(); break;
+            case 1: cadastrarHotel(email); break;
             case 2: listarHoteis(); break;
-            case 3: cadastrarQuarto(); break;
-            case 4: listarQuartos(); break;
+            case 3: listarQuartos(); break;
+            case 4: excluirHotel(email); break;
         }
     } while(opcao != 0);
 }
 
-void CntrApresentacaoGerenciamento::cadastrarHotel() {
+void CntrApresentacaoGerenciamento::cadastrarHotel(const Email& gerenteEmail) {
     string nomeStr, endStr, telStr, codStr;
     cout << "Nome: "; getline(cin, nomeStr);
     cout << "Endereco: "; getline(cin, endStr);
     cout << "Telefone: "; getline(cin, telStr);
     cout << "Codigo: "; getline(cin, codStr);
     Hotel h{Codigo(codStr), Nome(nomeStr), Endereco(endStr), Telefone(telStr)};
+    // associar o hotel ao gerente logado
+    h.setGerenteEmail(gerenteEmail);
     if (servico->criarHotel(h)) cout << "~ [Hotel cadastrado!] ~\n";
     else cout << "~ [Falha ao cadastrar] ~\n";
 }
 
 void CntrApresentacaoGerenciamento::listarHoteis() {
     auto lista = servico->listarHoteis();
-    for (auto& h : lista) h.exibirTudo();
+    for (auto& h : lista) {
+        cout << "==========================================\n";
+        cout << "              HOTEL:             \n";
+        cout << "==========================================\n\n";
+        h.exibirTudo();
+    }
 }
 
 void CntrApresentacaoGerenciamento::cadastrarQuarto() {
@@ -244,6 +233,23 @@ void CntrApresentacaoGerenciamento::listarQuartos() {
     cout << "Codigo do hotel: "; getline(cin, codStr);
     auto lista = servico->listarQuartos(Codigo(codStr));
     for (auto& q : lista) q.exibirTudo();
+}
+
+void CntrApresentacaoGerenciamento::excluirHotel(const Email& gerenteEmail) {
+    string codStr;
+    cout << "Codigo do hotel a excluir: "; getline(cin, codStr);
+    Hotel h; h.setCodigo(Codigo(codStr));
+    if (!servico->lerHotel(h)) {
+        cout << "Hotel nao encontrado.\n";
+        return;
+    }
+    // verificar se gerente logado eh o proprietario
+    if (h.getGerenteEmail().getValor() != gerenteEmail.getValor()) {
+        cout << "Apenas o gerente proprietario pode excluir este hotel.\n";
+        return;
+    }
+    if (servico->excluirHotel(Codigo(codStr))) cout << "~ [Hotel excluido!] ~\n";
+    else cout << "~ [Falha ao excluir hotel] ~\n";
 }
 
 void CntrApresentacaoGerenciamento::lerQuarto() {
@@ -289,9 +295,8 @@ void CntrApresentacaoReserva::menu(const Email& email) {
                   << "[1] - Criar reserva\n"
                   << "[2] - Cancelar reserva\n"
                   << "[3] - Listar reservas\n"
-                  << "[4] - Ler reserva\n"
-                  << "[5] - Editar reserva\n"
-                  << "[6] - Excluir reserva\n"
+                  << "[4] - Editar reserva\n"
+                  << "[5] - Ler reserva\n"
                   << "[0] - Voltar\n"
                   << "==========================================\n"
                   << "-> Escolha: ";
@@ -302,29 +307,109 @@ void CntrApresentacaoReserva::menu(const Email& email) {
             case 1: criarReserva(email); break;
             case 2: cancelarReserva(); break;
             case 3: listarReservas(email); break;
-            case 4: lerReserva(); break;
-            case 5: editarReserva(); break;
-            case 6: excluirReserva(); break;
+            case 4: editarReserva(); break;
+            case 5: lerReserva(); break;
         }
     } while(opcao != 0);
 }
 
-void CntrApresentacaoReserva::criarReserva(const Email& email) {
-    string nomeStr, endStr, cartaoStr, chegadaStr, partidaStr, codStr;
-    cout << "Nome: "; getline(cin, nomeStr);
+void CntrApresentacaoReserva::criarReserva(const Email& emailGerente) {
+    // Obter dados do gerente logado
+    // Criar Gerente vazio e setar apenas o email para buscar os dados persistentes
+    Gerente gerente;
+    gerente.setEmail(emailGerente);
+    if (!servGerenciamento || !servGerenciamento->lerGerente(gerente)) {
+        cout << "Erro ao obter dados do gerente. Abortando reserva.\n";
+        cout << "Pressione ENTER para continuar...";
+        string _tmp; getline(cin, _tmp);
+        return;
+    }
+
+    // DEBUG: imprimir nome do gerente obtido para diagnosticar validação de Nome
+    try {
+        cout << "[DEBUG] Nome do gerente obtido: '" << gerente.getNome().getValor() << "'\n";
+    } catch (...) {
+        cout << "[DEBUG] Nome do gerente obtido: (excecao ao acessar)\n";
+    }
+
+    // Fluxo de reserva: usar nome e email do gerente, pedir apenas endereco e cartao
+    string endStr, cartaoStr, chegadaStr, partidaStr, codStr, codHotelStr, numQuartoStr;
+    int capInt;
+
     cout << "Endereco: "; getline(cin, endStr);
     cout << "Cartao: "; getline(cin, cartaoStr);
-    cout << "Data chegada (DD/MM/AAAA): "; getline(cin, chegadaStr);
-    cout << "Data partida (DD/MM/AAAA): "; getline(cin, partidaStr);
-    cout << "Codigo reserva: "; getline(cin, codStr);
+    cout << "Codigo do hotel (verificacao sera feita): "; getline(cin, codHotelStr);
 
-    Hospede h(Nome(nomeStr), email, Endereco(endStr), Cartao(cartaoStr));
+    // verificar se hotel existe
+    Hotel htemp; htemp.setCodigo(Codigo(codHotelStr));
+    if (!servGerenciamento || !servGerenciamento->lerHotel(htemp)) {
+        cout << "Hotel nao encontrado. Abortando reserva.\n";
+        cout << "Pressione ENTER para continuar...";
+        string _tmp; getline(cin, _tmp);
+        return;
+    }
+
+    cout << "Numero do quarto (3 digitos): "; getline(cin, numQuartoStr);
+    cout << "Capacidade (1-4): "; cin >> capInt; cin.ignore();
+
+    cout << "Data chegada (DD-MMM-AAAA, ex: 01-FEV-2025): "; getline(cin, chegadaStr);
+    cout << "Data partida (DD-MMM-AAAA, ex: 04-FEV-2025): "; getline(cin, partidaStr);
+    cout << "Codigo reserva (exatamente 10 caracteres: letras minusculas e digitos, ex: reserv00001): "; getline(cin, codStr);
+
+    // criar hospede local com nome e email do gerente
+    Hospede hosp; // evitar "most vexing parse" usando construtor padrão
+    try {
+        hosp = Hospede{gerente.getNome(), emailGerente, Endereco(endStr), Cartao(cartaoStr)};
+    } catch (const std::invalid_argument &e) {
+        cout << "Dados de hospede invalidos: " << e.what() << "\n";
+        cout << "Abortando reserva. Pressione ENTER para continuar...";
+        string _tmp; getline(cin, _tmp);
+        return;
+    }
+
+    // montar quarto: se nao existir no hotel, criaremos via servGerenciamento
+    Quarto q(Numero(numQuartoStr), Capacidade(to_string(capInt)), Dinheiro("0.01"), Ramal("00"));
+    // atribuir valor baseado na capacidade (usando pricing.hpp)
+    if (capInt < 1 || capInt > 4) capInt = 1;
+    double preco = precoPorCapacidade(capInt);
+    Dinheiro dval; dval.setValor(preco); q.setValor(dval);
+
+    // tentar ler quarto existente
+    Quarto qcheck(Numero(numQuartoStr), Capacidade("1"), Dinheiro("0.01"), Ramal("00"));
+    bool quartoExiste = servGerenciamento->lerQuarto(Codigo(codHotelStr), qcheck);
+    if (!quartoExiste) {
+        // criar quarto dinamicamente
+        if (!servGerenciamento->criarQuarto(Codigo(codHotelStr), q)) {
+            cout << "Falha ao criar quarto no sistema. Abortando.\n";
+            cout << "Pressione ENTER para continuar...";
+            string _tmp; getline(cin, _tmp);
+            return;
+        }
+    } else {
+        // usar dados existentes (principalmente o valor)
+        q = qcheck;
+    }
+
+    // DEBUG: imprimir dados antes de criar Reserva
+    cout << "[DEBUG] Tentando criar Reserva com: Codigo='" << codStr << "', Chegada='" << chegadaStr << "', Partida='" << partidaStr << "'\n";
+
     Reserva r;
-    r.setHospede(&h);
-    r.setDatas(Data(chegadaStr), Data(partidaStr));
-    r.setCodigo(Codigo(codStr));
+    r.setHospede(&hosp);
+    try {
+    // setamos hotel/quarto com objetos locais contendo informacoes corretas (cod, numero)
+    Hotel hlocal(Codigo(codHotelStr), htemp.getNome(), htemp.getEndereco(), htemp.getTelefone());
+        r.setHotel(&hlocal);
+        r.setQuarto(&q);
+        r.setDatas(Data(chegadaStr), Data(partidaStr));
+        r.setCodigo(Codigo(codStr));
+    } catch (const std::invalid_argument &e) {
+        cout << "Erro ao validar campos da reserva: " << e.what() << "\n";
+        cout << "Abortando reserva. Pressione ENTER para continuar...";
+        string _tmp; getline(cin, _tmp);
+        return;
+    }
 
-    if (servico->criarReserva(h, r)) cout << "~ [Reserva criada!] ~\n";
+    if (servico->criarReserva(hosp, r)) cout << "~ [Reserva criada!] ~\n";
     else cout << "~ [Falha ao criar] ~\n";
 }
 
@@ -347,7 +432,14 @@ void CntrApresentacaoReserva::listarReservas(const Email& email) {
         return;
     }
     for (auto& r : lista) {
-        r.exibirTudo();
+        try {
+            cout << "==========================================\n";
+            cout << "                RESERVA:            \n";
+            cout << "==========================================\n\n";
+            r.exibirTudo();
+        } catch (const std::exception &e) {
+            cout << "Erro ao exibir reserva '" << r.getCodigo().getValor() << "': " << e.what() << "\n";
+        }
     }
 }
 

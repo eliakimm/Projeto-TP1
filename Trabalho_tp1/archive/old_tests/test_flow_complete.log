@@ -1,0 +1,97 @@
+==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: ==========================================
+             LOGIN DE GERENTE             
+==========================================
+
+Email: Senha: 
+[OK] Autenticacao bem-sucedida!
+
+Pressione ENTER para continuar...==========================================
+              MENU PRICIPAL               
+==========================================
+Usuario Autenticado
+Email: teste@hotel.com
+==========================================
+[1] - Gerenciar Dados Pessoais
+[2] - Gerenciar Hoteis
+[3] - Gerenciar Reservas
+[0] - Logout
+==========================================
+-> Escolha uma opcao: -> Escolha uma opcao: 
+Entrada invalida. Tente novamente.
+
+Pressione ENTER para continuar...-> Escolha uma opcao: 
+Entrada invalida. Tente novamente.
+
+Pressione ENTER para continuar...-> Escolha uma opcao: 
+[OK] Logout realizado com sucesso!
+
+Pressione ENTER para continuar...==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: 
+Entrada invalida. Tente novamente.
+
+Pressione ENTER para continuar...==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: 
+Entrada invalida. Tente novamente.
+
+Pressione ENTER para continuar...==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: 
+[X] Opcao invalida! Tente novamente.
+
+Pressione ENTER para continuar...==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: ==========================================
+             LOGIN DE GERENTE             
+==========================================
+
+Email: Senha: 
+[X] Erro de validacao: Email deve conter @
+
+Pressione ENTER para continuar...==========================================
+               BEM-VINDO AO               
+  SISTEMA DE GERENCIAMENTO HOTELEIRO
+==========================================
+[1] - Login de Gerente
+[2] - Cadastro de Gerente
+[3] - Sair do Sistema
+==========================================
+-> Escolha uma opcao: 
+==========================================
+   Obrigado por usar nosso sistema!
+         Ate logo!
+==========================================
+

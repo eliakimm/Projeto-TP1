@@ -5,6 +5,34 @@ StubAutenticacao::StubAutenticacao() : containerGerentes(nullptr) {
     // Container sera definido via setContainer
 }
 
+StubPessoal::StubPessoal() {
+    // Semente de usuario de teste: gerente
+    try {
+        Nome n("Teste Gerente");
+        Email e("teste@hotel.com");
+        Ramal r("01");
+        // Senha de 5 caracteres que respeita as regras: contem maiuscula, minuscula, digito e caractere especial
+        Senha s("A1b!2");
+        Gerente g(n, e, r, s);
+        containerGerentes.adicionar(g);
+    } catch (...) {
+        // se ocorrer qualquer validacao, nao falhamos — util apenas para testes locais
+    }
+
+    // Semente de hospede de teste
+    try {
+        Nome nh("Hospede Teste");
+        Email eh("hospede@teste.com");
+        Endereco end("Rua Teste, 123");
+        // Numero de cartao de 16 digitos (utilizar um cartao de teste que passe no algoritmo de Luhn)
+        Cartao c("4532015112830366");
+        Hospede h(nh, eh, end, c);
+        containerHospedes.adicionar(h);
+    } catch (...) {
+        // ignore
+    }
+}
+
 bool StubAutenticacao::autenticar(const Email& email, const Senha& senha) {
     if (!containerGerentes) return false;
     Gerente* g = containerGerentes->buscar(email);
@@ -26,9 +54,9 @@ bool StubPessoal::editarUsuario(const Gerente& g) {
     atualizado.setNome(g.getNome());
     atualizado.setRamal(g.getRamal());
     atualizado.setSenha(g.getSenha());
-    return containerGerentes.atualizar(atualizado);
+        return containerGerentes.atualizar(atualizado);
 }
-bool StubPessoal::excluirUsuario(const Email& e) { return containerGerentes.remover(e); }
+
 
 bool StubPessoal::criarHospede(const Hospede& h) { return containerHospedes.adicionar(h); }
 bool StubPessoal::lerHospede(Hospede& h) {
@@ -50,7 +78,22 @@ bool StubPessoal::excluirHospede(const Email& e) {
     if (reservaContainer) reservaContainer->removerPorHospede(e);
     return containerHospedes.remover(e);
 }
-std::vector<Hospede> StubPessoal::listarHospedes() { return containerHospedes.listarTodos(); }
+
+// Novo: remover gerente em cascata: remover hoteis associados e suas reservas
+// Retorna false se a remocao do gerente falhar por qualquer motivo.
+bool StubPessoal::excluirUsuario(const Email& e) {
+    // se tivermos um container de hoteis, remover os hoteis e reservas associadas
+    if (hotelContainer) {
+        auto removidos = hotelContainer->removerPorGerente(e);
+        if (reservaContainer) {
+            for (const auto &cod : removidos) {
+                reservaContainer->removerPorHotel(cod);
+            }
+        }
+    }
+        return containerGerentes.remover(e);
+}
+vector<Hospede> StubPessoal::listarHospedes() { return containerHospedes.listarTodos(); }
 
 bool StubGerenciamento::criarHotel(const Hotel& h) { return container.adicionarHotel(h); }
 bool StubGerenciamento::lerHotel(Hotel& h) {
@@ -79,6 +122,14 @@ bool StubGerenciamento::criarQuarto(const Codigo& cod, const Quarto& q) {
 
 bool StubGerenciamento::lerQuarto(const Codigo& cod, Quarto& q) {
     auto lista = container.listarQuartos(cod);
+    // se numero nao for fornecido em 'q', retornamos o primeiro quarto existente
+    if (q.getNumero().getValor().empty()) {
+        if (!lista.empty()) {
+            q = lista.front();
+            return true;
+        }
+        return false;
+    }
     for (auto& item : lista) {
         if (item.getNumero().getValor() == q.getNumero().getValor()) {
             q = item;
@@ -107,15 +158,50 @@ bool StubGerenciamento::excluirQuarto(const Codigo& cod, const Numero& num) {
     return container.removerQuarto(cod, num);
 }
 
-std::vector<Hotel> StubGerenciamento::listarHoteis() { return container.listarHoteis(); }
-std::vector<Quarto> StubGerenciamento::listarQuartos(Codigo cod) { return container.listarQuartos(cod); }
+vector<Hotel> StubGerenciamento::listarHoteis() { return container.listarHoteis(); }
+vector<Quarto> StubGerenciamento::listarQuartos(Codigo cod) { return container.listarQuartos(cod); }
+
+bool StubGerenciamento::lerGerente(Gerente& g) {
+    if (!gerentesContainer) return false;
+    Gerente* encontrado = gerentesContainer->buscar(g.getEmail());
+    if (!encontrado) return false;
+    g = *encontrado;
+    return true;
+}
 
 bool StubReserva::criarReserva(const Hospede& hospede, const Reserva& reserva) {
-    if (reserva.getHospede() != &hospede) return false;
-    return container.adicionar(reserva);
+    // Aceitamos reservas quando o email do hospede na reserva bate com o hospede informado.
+    if (!reserva.getHospede()) return false;
+    if (reserva.getHospede()->getEmail().getValor() != hospede.getEmail().getValor()) return false;
+
+    // Se tivermos um container de hospedes, tentamos apontar a reserva para o hospede persistente
+    Reserva rcopy = reserva;
+    if (hospedesContainer) {
+        Hospede* encontrado = hospedesContainer->buscar(reserva.getHospede()->getEmail());
+        if (!encontrado) {
+            // hospede nao existe no container: adicionamos uma copia persistente
+            hospedesContainer->adicionar(hospede);
+            encontrado = hospedesContainer->buscar(hospede.getEmail());
+        }
+        if (encontrado) rcopy.setHospede(encontrado);
+    }
+
+    // Se possuirmos o container de hoteis, apontamos o hotel/quarto para as instancias persistentes
+    if (hoteisContainer) {
+        if (reserva.getHotel()) {
+            Hotel* h = hoteisContainer->buscarHotel(reserva.getHotel()->getCodigo());
+            if (h) rcopy.setHotel(h);
+        }
+        if (reserva.getQuarto() && reserva.getHotel()) {
+            Quarto* q = hoteisContainer->buscarQuarto(reserva.getHotel()->getCodigo(), reserva.getQuarto()->getNumero());
+            if (q) rcopy.setQuarto(q);
+        }
+    }
+
+    return container.adicionar(rcopy);
 }
 bool StubReserva::cancelarReserva(const Codigo& cod) { return container.remover(cod); }
-std::vector<Reserva> StubReserva::listarReservas(Email e) { return container.listarPorEmail(e); }
+vector<Reserva> StubReserva::listarReservas(Email e) { return container.listarPorEmail(e); }
 
 bool StubReserva::lerReserva(Reserva& r) {
     return container.buscarReserva(r.getCodigo(), r);

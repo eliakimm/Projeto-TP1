@@ -1,0 +1,19 @@
+PASS: Criar gerente
+PASS: Autenticar gerente (credenciais corretas)
+PASS: Ler gerente por email
+PASS: Autenticar gerente (senha errada deve falhar)
+PASS: Criar hotel
+PASS: Criar quarto no hotel
+PASS: Criar reserva sem conflito
+PASS: Criar reserva conflitante deve falhar
+PASS: Criar reserva nao conflitiva
+PASS: Editar reserva para datas conflituosas deve falhar
+PASS: Editar reserva para novas datas validas
+PASS: Criar hospede 2 no container
+PASS: Criar reserva para hospede 2
+PASS: Excluir hospede 2 (com exclusao de suas reservas)
+PASS: Reservas do hospede 2 removidas apos exclusao
+PASS: Criar reserva para testar exclusao de hotel
+PASS: Excluir hotel (deve remover reservas associadas)
+PASS: Reserva associada ao hotel removido tambem removida
+Fim dos testes.

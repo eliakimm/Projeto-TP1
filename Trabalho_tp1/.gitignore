@@ -1,0 +1,19 @@
+# Ignore build artifacts, binaries and archives
+/archive/
+/bin/
+/obj/
+/output/
+/html/
+*.exe
+*.o
+*.out
+*.log
+*.zip
+*.tar.gz
+
+# IDE / editor
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

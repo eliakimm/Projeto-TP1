@@ -1,194 +1,210 @@
 #include "entidades.hpp"
 #include <iostream>
-#include <algorithm>
-#include <cctype>
-#include <string>
-#include <stdexcept>
-#include <vector>
+#include <sstream>
+#include <iomanip>
 #include <cmath>
 #include <map>
-#include <chrono>
+#include <ctime>
 
-using namespace std;
-using namespace std::chrono;
+// ==================== Pessoa ====================
+Pessoa::Pessoa(const Nome& n, const Email& e) : nome(n), email(e) {}
 
+void Pessoa::setNome(const Nome& nomeNovo) { nome = nomeNovo; }
+void Pessoa::setEmail(const Email& emailNovo) { email = emailNovo; }
 
-// Pessoa
-Pessoa::Pessoa(const Nome& nome, const Email& email){
-    this->nome = nome;
-    this->email = email;
+Nome Pessoa::getNome() const { return nome; }
+Email Pessoa::getEmail() const { return email; }
+
+void Pessoa::exibirTudo() const {
+    cout << "Nome: " << nome.getValor() << "\n"
+              << "Email: " << email.getValor() << "\n";
 }
 
-void Pessoa::setNome(const Nome& nomeNovo){
-    nome = nomeNovo;
-}
-Nome Pessoa::getNome() const{
-    return nome;
+// ==================== Gerente ====================
+Gerente::Gerente(const Nome& n, const Email& e, const Ramal& r, const Senha& s)
+    : Pessoa(n, e), ramal(r), senha(s) {}
+
+void Gerente::setRamal(Ramal r) { ramal = r; }
+void Gerente::setSenha(Senha s) { senha = s; }
+
+Ramal Gerente::getRamal() const { return ramal; }
+Senha Gerente::getSenha() const { return senha; }
+
+void Gerente::exibirTudo() const {
+    Pessoa::exibirTudo();
+    cout << "Ramal: " << ramal.getValor() << "\n"
+              << "Senha: " << senha.getValor() << "\n";
 }
 
-void Pessoa::setEmail(const Email& emailNovo){
-    email = emailNovo;
-}
-Email Pessoa::getEmail() const{
-    return email;
+// ==================== Hospede ====================
+Hospede::Hospede(const Nome& n, const Email& e, const Endereco& end, const Cartao& c)
+    : Pessoa(n, e), endereco(end), cartao(c) {}
+
+void Hospede::setEndereco(const Endereco& e) { endereco = e; }
+void Hospede::setCartao(const Cartao& c)     { cartao   = c; }
+
+Endereco Hospede::getEndereco() const { return endereco; }
+Cartao   Hospede::getCartao()   const { return cartao; }
+
+void Hospede::exibirTudo() const {
+    Pessoa::exibirTudo();
+    cout << "Endereco: " << endereco.getValor() << "\n"
+              << "Cartao: " << cartao.getValor() << "\n";
 }
 
-void Pessoa::exibirTudo() const{
-    cout << "=== DADOS PESSOAIS - TESTE ===" << endl;
-    cout << "Nome: " << nome.getValor() << endl;
-    cout << "Email: " << email.getValor() << endl;
-    cout << "======================" << endl;
+// ==================== Hotel ====================
+Hotel::Hotel(const Codigo& c, const Nome& n, const Endereco& e, const Telefone& t)
+    : codigo(c), nome(n), endereco(e), telefone(t) {}
+
+void Hotel::setGerenteEmail(const Email& em) { gerenteEmail = em; }
+Email Hotel::getGerenteEmail() const { return gerenteEmail; }
+
+void Hotel::setCodigo(const Codigo& c) { codigo   = c; }
+void Hotel::setNome(const Nome& n)     { nome     = n; }
+void Hotel::setEndereco(const Endereco& e) { endereco = e; }
+void Hotel::setTelefone(const Telefone& t) { telefone = t; }
+
+Codigo   Hotel::getCodigo()   const { return codigo; }
+Nome     Hotel::getNome()     const { return nome; }
+Endereco Hotel::getEndereco() const { return endereco; }
+Telefone Hotel::getTelefone() const { return telefone; }
+
+void Hotel::exibirTudo() const {
+    cout << "Codigo: " << codigo.getValor() << "\n"
+              << "Nome: " << nome.getValor() << "\n"
+              << "Endereco: " << endereco.getValor() << "\n"
+              << "Telefone: " << telefone.getValor() << "\n";
 }
 
-//GERENTE:
+// ==================== Quarto ====================
+Quarto::Quarto(const Numero& num, const Capacidade& cap, const Dinheiro& v, const Ramal& ram)
+    : numero(num), capacidade(cap), valor(v), ramal(ram) {}
 
-void Gerente::setRamal(Ramal ramal){
-    this->ramal= ramal;
+void Quarto::setNumero(const Numero& n)      { numero    = n; }
+void Quarto::setCapacidade(const Capacidade& c) { capacidade = c; }
+void Quarto::setValor(const Dinheiro& v)     { valor     = v; }
+void Quarto::setRamal(const Ramal& r)        { ramal     = r; }
+
+Numero    Quarto::getNumero()     const { return numero; }
+Capacidade Quarto::getCapacidade() const { return capacidade; }
+Dinheiro  Quarto::getValor()      const { return valor; }
+Ramal     Quarto::getRamal()      const { return ramal; }
+
+void Quarto::exibirTudo() const {
+    cout << "Quarto numero: " << numero.getValor() << "\n"
+              << "Capacidade: "  << capacidade.getValor() << "\n"
+              << "Valor: "       << valor.getValor() << "\n"
+              << "Ramal: "       << ramal.getValor() << "\n";
 }
 
-void Gerente::setSenha(Senha senha){
-    this->senha= senha;
-}
+// ==================== Reserva ====================
+Reserva::Reserva(const Codigo& c, Hospede* h, Hotel* ho, Quarto* q,
+                 const Data& checkin, const Data& checkout)
+    : codigo(c), hospede(h), hotel(ho), quarto(q),
+      dataCheckin(checkin), dataCheckout(checkout) {}
 
-Gerente::Gerente(Nome nome, Email email, Ramal ramal, Senha senha)
-    :Pessoa(nome, email){
-    setRamal(ramal);
-    setSenha(senha);
-}
+void Reserva::setCodigo(const Codigo& c) { codigo = c; }
+void Reserva::setHospede(Hospede* h)     { hospede = h; }
+void Reserva::setHotel(Hotel* ho)        { hotel   = ho; }
+void Reserva::setQuarto(Quarto* q)       { quarto  = q; }
 
-//HOSPEDE:
-
-void Hospede::setEndereco(Endereco endereco){
-    this->endereco= endereco;
-}
-
-void Hospede::setCartao(Cartao cartao){
-    this->cartao= cartao;
-}
-
-Hospede::Hospede(Nome nome, Email email, Endereco endereco, Cartao cartao)
-    :Pessoa(nome,email){
-    setEndereco(endereco);
-    setCartao(cartao);
-}
-
-//QUARTO:
-
-Quarto::Quarto(const Numero& numero, const Capacidade& capacidade, const Dinheiro& dinheiro, const Ramal& ramal){
-    this->numero = numero;
-    this->capacidade = capacidade;
-    this->dinheiro = dinheiro;
-    this->ramal = ramal;
-}
-
-void Quarto::setNumero(const Numero& numNovo){
-    numero = numNovo;
-}
-Numero Quarto::getNumero() const{
-    return numero;
-}
-
-void Quarto::setCapacidade(const Capacidade& capaNova){
-    capacidade = capaNova;
-}
-Capacidade Quarto::getCapacidade() const{
-    return capacidade;
-}
-
-void Quarto::setDinheiro(const Dinheiro& dinNovo){
-    dinheiro = dinNovo;
-}
-Dinheiro Quarto::getDinheiro() const{
-    return dinheiro;
-}
-
-void Quarto::setRamal(const Ramal& raNovo){
-    ramal = raNovo;
-}
-Ramal Quarto::getRamal() const{
-    return ramal;
-}
-
-void Quarto::exibirTudo() const{
-    cout << "=== DADOS DO QUARTO ===" << endl;
-    cout << "Numero: " << numero.getValor() << endl;
-    cout << "Capacidade: " << capacidade.getValor() << endl;
-    cout << "Valor: R$" << dinheiro.getValor() << endl;
-    cout << "Ramal: " << ramal.getValor() << endl;
-    cout << "=======================" << endl;
-}
-
-//RESERVA:
-
-int Reserva::ContarDias(string data1, string data2) {
-    map<string,int> meses = {
-        {"JAN",1}, {"FEV",2}, {"MAR",3}, {"ABR",4},
-        {"MAI",5}, {"JUN",6}, {"JUL",7}, {"AGO",8},
-        {"SET",9}, {"OUT",10}, {"NOV",11}, {"DEZ",12}
+// Helper: calcula dias entre duas datas no formato DD-MMM-AAAA
+// Meses: JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ
+static int diasEntre(const string& d1, const string& d2) {
+    static const map<string, int> meses = {
+        {"JAN", 0}, {"FEV", 1}, {"MAR", 2}, {"ABR", 3}, {"MAI", 4}, {"JUN", 5},
+        {"JUL", 6}, {"AGO", 7}, {"SET", 8}, {"OUT", 9}, {"NOV", 10}, {"DEZ", 11}
     };
-
-    auto converter = [&](string data) {
-        int dia = stoi(data.substr(0,2));
-        int mes = meses[data.substr(3,3)];
-        int ano = stoi(data.substr(7,4));
-
-        int total = dia;
-        for (int m = 1; m < mes; m++) {
-            if (m == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)))
-                total += 29;
-            else {
-                int diasPorMes[] = {31,28,31,30,31,30,31,31,30,31,30,31};
-                total += diasPorMes[m - 1];
-            }
-        }
-        for (int a = 1; a < ano; a++) {
-            total += ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0)) ? 366 : 365;
-        }
-        return total;
+    auto parse = [&](const string& d) -> tm {
+        tm tm = {};
+        tm.tm_mday = stoi(d.substr(0,2));
+        string mesStr = d.substr(3,3);
+        for (char& c : mesStr) c = toupper(c);
+        tm.tm_mon = meses.at(mesStr);
+        tm.tm_year = stoi(d.substr(7,4)) - 1900;
+        // Fixar hora ao meio-dia para evitar problemas com horarios de verao
+        tm.tm_hour = 12;
+        tm.tm_min = 0;
+        tm.tm_sec = 0;
+        tm.tm_isdst = -1;
+        return tm;
     };
-
-    return converter(data2) - converter(data1);
-}
-
-//setters:
-
-void Reserva::verificaData(Data data1, Data data2){
-    if(ContarDias(data1.getValor(), data2.getValor()) <= 0){
-        throw invalid_argument("Data invalida");
+    tm tm1 = parse(d1);
+    tm tm2 = parse(d2);
+    time_t time1 = mktime(&tm1);
+    time_t time2 = mktime(&tm2);
+    double diff = 0.0;
+    if (time1 == (time_t)(-1) || time2 == (time_t)(-1)) {
+        return 0;
+    } else {
+        diff = difftime(time2, time1) / (60*60*24);
+        return static_cast<int>(diff);
     }
 }
 
-void Reserva::setDatas(Data data1, Data data2){
-    verificaData(data1, data2);
-    this->chegada= data1;
-    this->partida= data2;
-    CalculoValor();
+void Reserva::setDatas(const Data& checkin, const Data& checkout) {
+    int dias = diasEntre(checkin.getValor(), checkout.getValor());
+    if (dias <= 0) throw invalid_argument("Data invalida");
+    dataCheckin = checkin;
+    dataCheckout = checkout;
 }
 
-void Reserva::setCodigo(Codigo codigo){
-    this->codigo= codigo;
+Codigo Reserva::getCodigo() const { return codigo; }
+Hospede* Reserva::getHospede() const { return hospede; }
+Hotel* Reserva::getHotel() const { return hotel; }
+Quarto* Reserva::getQuarto() const { return quarto; }
+Data Reserva::getCheckin() const { return dataCheckin; }
+Data Reserva::getCheckout() const { return dataCheckout; }
+
+void Reserva::exibir_reserva() {
+    cout << dataCheckin.getValor() << " | RESERVA:" << endl;
+    if (hospede) cout << "Nome do hospede: " << hospede->getNome().getValor() << endl;
+    if (quarto) cout << "Quarto: " << quarto->getNumero().getValor() << endl;
+    if (quarto) cout << "Ramal: " << quarto->getRamal().getValor() << endl;
+    // calcular valor total: dias * valor do quarto
+    if (quarto) {
+        int dias = diasEntre(dataCheckin.getValor(), dataCheckout.getValor());
+        double valorUnit = stod(quarto->getValor().getValor());
+        double total = dias * valorUnit;
+        ostringstream oss;
+        oss << fixed << setprecision(2) << total;
+        cout << ": " << quarto->getValor().getValor() << endl;
+        cout << "Dias: " << dias << endl;
+        cout << "Valor total: " << oss.str() << endl;
+    }
 }
 
-void Reserva::setHospede(Hospede* h){
-    this->hospede= h;
-}
-
-void Reserva::setQuarto(Quarto* q){
-    this->quarto= q;
-}
-
-double Reserva::CalculoValor(){
-    double dias_contados= (ContarDias(chegada.getValor(),partida.getValor())) * quarto->getDinheiro().getValor();
-    Dinheiro temp;
-    temp.setValor(dias_contados);
-    this->valor= temp;
-}
-
-
-void Reserva::exibir_reserva(){
-    cout << chegada.getValor() << " | RESERVA:" << endl;
-    cout << "Nome do hospede: " << hospede->getNome().getValor() << endl;
-    cout << "Quarto: " << quarto->getNumero().getValor() << endl;
-    cout << "Ramal: " << quarto->getRamal().getValor() << endl;
-    cout << "Valor total: " << valor.getValor() << endl;
+void Reserva::exibirTudo() const {
+    cout << "Reserva codigo: " << codigo.getValor() << "\n";
+    if (hospede) {
+        cout << "Hospede: " << hospede->getNome().getValor()
+                  << " (" << hospede->getEmail().getValor() << ")\n";
+    } else {
+        cout << "Hospede: (nenhum)\n";
+    }
+    if (hotel) {
+        cout << "Hotel: " << hotel->getNome().getValor()
+                  << " [" << hotel->getCodigo().getValor() << "]\n";
+    } else {
+        cout << "Hotel: (nenhum)\n";
+    }
+    if (quarto) {
+        cout << "Quarto: " << quarto->getNumero().getValor() << "\n";
+        cout << "Ramal: " << quarto->getRamal().getValor() << "\n";
+    } else {
+        cout << "Quarto: (nenhum)\n";
+    }
+    cout << "Check-in: "  << dataCheckin.getValor()
+              << "\nCheck-out: " << dataCheckout.getValor() << "\n";
+    // Valor total
+    if (quarto) {
+        int dias = diasEntre(dataCheckin.getValor(), dataCheckout.getValor());
+        double valorUnit = stod(quarto->getValor().getValor());
+        double total = dias * valorUnit;
+        ostringstream oss;
+        oss << fixed << setprecision(2) << total;
+        cout << "Diaria: " << quarto->getValor().getValor() << "\n";
+        cout << "Dias: " << dias << "\n";
+        cout << "Valor total: " << oss.str() << "\n";
+    }
 }
